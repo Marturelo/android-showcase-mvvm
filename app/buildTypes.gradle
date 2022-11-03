@@ -1,0 +1,11 @@
+android {
+    defaultConfig {
+        buildConfigField "String", "HOST", "\"https://us-central1-techtaskapi.cloudfunctions.net\""
+    }
+    buildTypes {
+        debug {
+        }
+        release {
+        }
+    }
+}
