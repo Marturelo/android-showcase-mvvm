@@ -1,4 +1,4 @@
-package pe.com.bcp.guidelineunittest
+package pe.com.bcp.guidelineunittest.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

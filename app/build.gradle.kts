@@ -40,15 +40,22 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
     }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.ext.get("kotlinVersion")}")
+
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
 
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
@@ -63,11 +70,19 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
-    //epoxy
-    implementation("com.airbnb.android:epoxy:4.1.0")
-    kapt("com.airbnb.android:epoxy-processor:4.1.0")
+    //Logger
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-    kapt("com.github.bumptech.glide:compiler:4.13.2")
+    // Dagger
+    implementation("com.google.dagger:dagger:2.40.5")
+    implementation("com.google.dagger:dagger-android:2.40.5")
+    implementation("com.google.dagger:dagger-android-support:2.40.5")
+    kapt("com.google.dagger:dagger-compiler:2.40.5")
+    kapt("com.google.dagger:dagger-android-processor:2.40.5")
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
+        kotlinOptions {
+            freeCompilerArgs.plus("-Xjvm-default=all-compatibility")
+        }
+    }
 }
