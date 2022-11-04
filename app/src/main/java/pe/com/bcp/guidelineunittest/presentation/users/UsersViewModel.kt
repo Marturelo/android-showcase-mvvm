@@ -56,6 +56,7 @@ class UsersViewModel @Inject constructor(
             val results = result.getOrElse(listOf())
             _users.value = results.map { it.toVO() }
         }
+        _isLoading.value = false
     }
 
     @VisibleForTesting
