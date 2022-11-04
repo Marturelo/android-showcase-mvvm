@@ -65,13 +65,17 @@ dependencies {
 
     // Test
     testImplementation("junit:junit:4.13.2")
-    testImplementation("android.arch.core:core-testing:1.1.1")
-    testImplementation("org.mockito:mockito-core:2.19.0")
+    testImplementation("org.mockito:mockito-core:4.3.1")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+    testImplementation("com.squareup.retrofit2:retrofit-mock:2.9.0")
+    testImplementation("com.squareup.assertj:assertj-android:1.2.0")
+    testImplementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    testImplementation("io.mockk:mockk:1.12.2")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-    testImplementation("io.mockk:mockk:1.10.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
+    implementation("junit:junit:4.13.2")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
