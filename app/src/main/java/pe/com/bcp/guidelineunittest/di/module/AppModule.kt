@@ -11,6 +11,8 @@ import javax.inject.Singleton
 @Module(
     includes = [
         ViewModelModule::class,
+        NetworkModule::class,
+        DataModule::class,
     ]
 )
 abstract class AppModule {
