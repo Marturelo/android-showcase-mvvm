@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 apply(from = "buildTypes.gradle")
+apply(from = "jacoco.gradle")
 
 kapt {
     correctErrorTypes = true
@@ -64,8 +65,13 @@ dependencies {
 
     // Test
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    testImplementation("android.arch.core:core-testing:1.1.1")
+    testImplementation("org.mockito:mockito-core:2.19.0")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("io.mockk:mockk:1.10.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("com.android.support.test:runner:1.0.2")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")

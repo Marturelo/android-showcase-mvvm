@@ -62,6 +62,11 @@ class UsersViewModel @Inject constructor(
     fun handleFailure(failure: Failure) {
         _failure.value = failure
     }
+
+    @VisibleForTesting
+    fun setUsers(users: List<UserListItemVO>) {
+        _users.value = users
+    }
 }
 
 object UsersState {

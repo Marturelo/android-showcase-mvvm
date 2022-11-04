@@ -31,7 +31,6 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
         /*binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }*/
-
         with(viewModel) {
             observe(users, ::handleUsers)
             observe(isLoading, ::handleIsLoading)
