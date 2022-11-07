@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_users.slUsers
+import pe.com.bcp.guidelineunittest.R
 import pe.com.bcp.guidelineunittest.databinding.FragmentUsersBinding
 import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.exception.failure
 import pe.com.bcp.guidelineunittest.exception.observe
 import pe.com.bcp.guidelineunittest.presentation.core.BaseFragment
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.ERROR
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.LOADING
 import pe.com.bcp.guidelineunittest.presentation.users.adapter.UserController
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 
@@ -31,8 +35,10 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
 
         setupRecyclerView()
+        setupStatefulLayout()
 
         with(viewModel) {
             observe(users, ::handleUsers)
@@ -56,6 +62,24 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
     private fun setupRecyclerView() {
         controller = UserController(::handleItemPressed)
         binding.rvProduct.adapter = controller.adapter
+    }
+
+    private fun setupStatefulLayout() {
+        slUsers.setStateView(
+            ERROR,
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.layout_users_state_error,
+                null
+            )
+        )
+
+        slUsers.setStateView(
+            LOADING,
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.layout_users_state_loading,
+                null
+            )
+        )
     }
 
     private fun navigateToDetails(item: UserListItemVO?) {
