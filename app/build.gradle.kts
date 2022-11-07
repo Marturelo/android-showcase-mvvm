@@ -91,6 +91,14 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:2.40.5")
     kapt("com.google.dagger:dagger-android-processor:2.40.5")
 
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+    kapt("com.github.bumptech.glide:compiler:4.13.2")
+
+    //epoxy
+    implementation("com.airbnb.android:epoxy:4.1.0")
+    kapt("com.airbnb.android:epoxy-processor:4.1.0")
+
     //okHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
