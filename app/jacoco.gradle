@@ -54,6 +54,7 @@ android {
             '**/*TextWatcher*',
             '**/*TextWatcher*.*',
             '**/*Activity*.*',
+            '**/core/*.*',
             '**/*Fragment*.*',
 
             // data binding

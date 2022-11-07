@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface UserAPI {
     @GET("/users")
-    suspend fun products(): Response<List<UserModel>>
+    suspend fun users(): Response<List<UserModel>>
 }
