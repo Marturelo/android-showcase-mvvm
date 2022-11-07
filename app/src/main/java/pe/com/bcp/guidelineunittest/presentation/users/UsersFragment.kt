@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_users.slUsers
 import pe.com.bcp.guidelineunittest.R
 import pe.com.bcp.guidelineunittest.databinding.FragmentUsersBinding
 import pe.com.bcp.guidelineunittest.exception.Failure
@@ -61,11 +60,11 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
 
     private fun setupRecyclerView() {
         controller = UserController(::handleItemPressed)
-        binding.rvProduct.adapter = controller.adapter
+        binding.rvUsers.adapter = controller.adapter
     }
 
     private fun setupStatefulLayout() {
-        slUsers.setStateView(
+        binding.slUsers.setStateView(
             ERROR,
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.layout_users_state_error,
@@ -73,7 +72,7 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
             )
         )
 
-        slUsers.setStateView(
+        binding.slUsers.setStateView(
             LOADING,
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.layout_users_state_loading,

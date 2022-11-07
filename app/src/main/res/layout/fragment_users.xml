@@ -48,7 +48,7 @@
                 app:onRefreshListener="@{() -> viewModel.refresh()}">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvProduct"
+                    android:id="@+id/rvUsers"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="8dp"
