@@ -1,10 +1,10 @@
 # Guideline UnitTest MVVM
 * API: [Github Users](https://api.github.com/users)
-## Main technologies
+## Technologies
 - Kotlin
 **Current**: v1.0.0
 ## Topics
-- [Main technologies](#Main technologies)
+- [Main technologies](#technologies)
 - [Installation](#installation)
 ## Main technologies
 * Kotlin
