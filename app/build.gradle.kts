@@ -60,8 +60,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
 
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:${rootProject.ext.get("navVersion")}")
+    implementation("androidx.navigation:navigation-ui-ktx:${rootProject.ext.get("navVersion")}")
 
     // Test
     testImplementation("junit:junit:4.13.2")

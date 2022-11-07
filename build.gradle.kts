@@ -1,7 +1,7 @@
 buildscript {
 
     val kotlinVersion by extra { "1.5.31" }
-    val navVersion by extra { "2.3.5" }
+    val navVersion by extra { "2.4.1" }
     val androidGradlePluginVersion by extra { "7.0.3" }
     val jacocoVersion by extra { "0.8.7" }
 

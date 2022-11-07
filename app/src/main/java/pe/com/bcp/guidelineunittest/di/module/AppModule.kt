@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import pe.com.bcp.guidelineunittest.App
+import pe.com.bcp.guidelineunittest.presentation.details.UserDetailsFragment
 import pe.com.bcp.guidelineunittest.presentation.users.UsersFragment
 import javax.inject.Singleton
 
@@ -22,4 +23,7 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     abstract fun contributeUsersFragment(): UsersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeUserDetailsFragment(): UserDetailsFragment
 }

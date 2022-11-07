@@ -14,6 +14,7 @@ import pe.com.bcp.guidelineunittest.domain.entity.UserEntity
 import pe.com.bcp.guidelineunittest.domain.usecase.GetUsersUseCase
 import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.presentation.commons.StatefulLayout
+import pe.com.bcp.guidelineunittest.presentation.core.SingleLiveEvent
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 import pe.com.bcp.guidelineunittest.presentation.users.vo.toVO
 import javax.inject.Inject
@@ -21,6 +22,9 @@ import javax.inject.Inject
 class UsersViewModel @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase,
 ) : ViewModel() {
+
+    private val _goToDetails: SingleLiveEvent<UserListItemVO> = SingleLiveEvent()
+    val goToDetails: LiveData<UserListItemVO> = _goToDetails
 
     private val _users: MutableLiveData<List<UserListItemVO>> = MutableLiveData()
     val users: LiveData<List<UserListItemVO>> = _users
@@ -67,6 +71,10 @@ class UsersViewModel @Inject constructor(
     @VisibleForTesting
     fun setUsers(users: List<UserListItemVO>) {
         _users.value = users
+    }
+
+    fun handleItemPressed(item: UserListItemVO) {
+        _goToDetails.value = item
     }
 }
 

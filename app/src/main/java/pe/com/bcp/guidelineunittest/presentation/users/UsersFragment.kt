@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import pe.com.bcp.guidelineunittest.databinding.FragmentUsersBinding
 import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.exception.failure
@@ -35,6 +36,7 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
 
         with(viewModel) {
             observe(users, ::handleUsers)
+            observe(goToDetails, ::navigateToDetails)
             observe(isLoading, ::handleIsLoading)
             failure(failure, ::handleFailure)
         }
@@ -52,8 +54,22 @@ class UsersFragment : BaseFragment<UsersViewModel>() {
     }
 
     private fun setupRecyclerView() {
-        controller = UserController()
+        controller = UserController(::handleItemPressed)
         binding.rvProduct.adapter = controller.adapter
+    }
+
+    private fun navigateToDetails(item: UserListItemVO?) {
+        item ?: return
+
+        findNavController().navigate(
+            UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(
+                item
+            ),
+        )
+    }
+
+    private fun handleItemPressed(item: UserListItemVO) {
+        viewModel.handleItemPressed(item)
     }
 
     private fun handleUsers(values: List<UserListItemVO>?) {

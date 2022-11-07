@@ -41,6 +41,7 @@ android {
             '**/ingresarclave/*',
             '**/view/*',
             '**/extension/*',
+            '**/ext/*',
             '**/exception/*',
             '**/analytics/*.*',
             '**/entity/*.*',
@@ -54,6 +55,7 @@ android {
             '**/*TextWatcher*',
             '**/*TextWatcher*.*',
             '**/*Activity*.*',
+            '**/*_Factory*.*',
             '**/core/*.*',
             '**/*Fragment*.*',
 

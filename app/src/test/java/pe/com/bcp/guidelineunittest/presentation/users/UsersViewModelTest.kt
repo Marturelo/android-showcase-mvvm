@@ -126,4 +126,19 @@ class UsersViewModelTest : BaseViewModelTest() {
         Assert.assertEquals(false, observerIsLoading.capture.first())
     }
 
+    @Test
+    fun `given loaded users then handleItemPressed then verify`() {
+        //given
+        val observerGoToDetails = CaptureObserver<UserListItemVO>()
+        viewModel.goToDetails.observeForever(observerGoToDetails)
+        val user = FakeValuesVO.user()
+
+        //when
+        viewModel.handleItemPressed(user)
+
+        //then
+        Assert.assertEquals(listOf(user), observerGoToDetails.capture)
+
+    }
+
 }

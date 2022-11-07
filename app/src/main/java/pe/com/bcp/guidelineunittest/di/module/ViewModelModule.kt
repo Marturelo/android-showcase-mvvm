@@ -7,6 +7,7 @@ import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
 import pe.com.bcp.guidelineunittest.presentation.core.ViewModelFactory
+import pe.com.bcp.guidelineunittest.presentation.details.UserDetailsViewModel
 import pe.com.bcp.guidelineunittest.presentation.users.UsersViewModel
 import kotlin.reflect.KClass
 
@@ -16,7 +17,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(UsersViewModel::class)
-    abstract fun bindAddProductViewModel(viewModel: UsersViewModel): ViewModel
+    abstract fun bindUsersViewModel(viewModel: UsersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserDetailsViewModel::class)
+    abstract fun bindUserDetailsViewModel(viewModel: UserDetailsViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
