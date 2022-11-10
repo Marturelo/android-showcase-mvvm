@@ -17,9 +17,8 @@ import pe.com.bcp.guidelineunittest.presentation.commons.StatefulLayout
 import pe.com.bcp.guidelineunittest.presentation.core.SingleLiveEvent
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 import pe.com.bcp.guidelineunittest.presentation.users.vo.toVO
-import javax.inject.Inject
 
-class UsersViewModel @Inject constructor(
+class UsersViewModel constructor(
     private val getUsersUseCase: GetUsersUseCase,
 ) : ViewModel() {
 

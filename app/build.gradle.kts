@@ -63,6 +63,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${rootProject.ext.get("navVersion")}")
     implementation("androidx.navigation:navigation-ui-ktx:${rootProject.ext.get("navVersion")}")
 
+    implementation(kotlin("reflect"))
+
     // Test
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:4.3.1")
@@ -83,13 +85,6 @@ dependencies {
 
     //Logger
     implementation("com.jakewharton.timber:timber:5.0.1")
-
-    // Dagger
-    implementation("com.google.dagger:dagger:2.40.5")
-    implementation("com.google.dagger:dagger-android:2.40.5")
-    implementation("com.google.dagger:dagger-android-support:2.40.5")
-    kapt("com.google.dagger:dagger-compiler:2.40.5")
-    kapt("com.google.dagger:dagger-android-processor:2.40.5")
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.13.2")

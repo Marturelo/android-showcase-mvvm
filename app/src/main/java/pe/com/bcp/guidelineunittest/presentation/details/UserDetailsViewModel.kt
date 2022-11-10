@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pe.com.bcp.guidelineunittest.presentation.core.SingleLiveEvent
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
-import javax.inject.Inject
 
-class UserDetailsViewModel @Inject constructor() : ViewModel() {
+class UserDetailsViewModel : ViewModel() {
 
     private val _goToBack: SingleLiveEvent<Any> = SingleLiveEvent()
     val goToBack: LiveData<Any> = _goToBack

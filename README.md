@@ -14,5 +14,5 @@
 - Configure gradle archive and sync
 - Execute project with emulator or device
 ## Test
-- Ejecutar `gradlew test` para ejecutar todos los tests unitarios.
-- Ejecutar `gradlew jacocoTestCoverageVerification` para ejecutar todos los tests, verificación de coverage y el reporte.
+- Ejecutar `./gradlew test` para ejecutar todos los tests unitarios.
+- Ejecutar `./gradlew jacocoTestCoverageViewResult` para ejecutar todos los tests, verificación de coverage y el reporte.

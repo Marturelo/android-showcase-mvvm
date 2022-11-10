@@ -4,19 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pe.com.bcp.guidelineunittest.R
 import pe.com.bcp.guidelineunittest.databinding.FragmentUsersBinding
+import pe.com.bcp.guidelineunittest.di.Locator
 import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.exception.failure
 import pe.com.bcp.guidelineunittest.exception.observe
-import pe.com.bcp.guidelineunittest.presentation.core.BaseFragment
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.ERROR
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.LOADING
 import pe.com.bcp.guidelineunittest.presentation.users.adapter.UserController
+import pe.com.bcp.guidelineunittest.presentation.users.di.UsersViewModelFactory
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 
-class UsersFragment : BaseFragment<UsersViewModel>() {
+class UsersFragment : Fragment() {
+
+    private val viewModel by viewModels<UsersViewModel> {
+        UsersViewModelFactory(
+            Locator.get()
+        )
+    }
 
     private lateinit var controller: UserController
 

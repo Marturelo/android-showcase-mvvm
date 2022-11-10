@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -12,9 +14,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import pe.com.bcp.guidelineunittest.databinding.FragmentUserDetailsBinding
 import pe.com.bcp.guidelineunittest.exception.observe
 import pe.com.bcp.guidelineunittest.ext.dp
-import pe.com.bcp.guidelineunittest.presentation.core.BaseFragment
+import pe.com.bcp.guidelineunittest.presentation.details.di.UserDetailsViewModelFactory
 
-class UserDetailsFragment : BaseFragment<UserDetailsViewModel>() {
+class UserDetailsFragment : Fragment() {
+
+    private val viewModel by viewModels<UserDetailsViewModel> {
+        UserDetailsViewModelFactory()
+    }
 
     val args: UserDetailsFragmentArgs by navArgs()
 

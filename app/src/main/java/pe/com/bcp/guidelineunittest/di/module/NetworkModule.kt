@@ -2,9 +2,6 @@ package pe.com.bcp.guidelineunittest.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dagger.Module
-import dagger.Provides
-import dagger.Reusable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import pe.com.bcp.guidelineunittest.BuildConfig
@@ -15,9 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-@Module
-class NetworkModule {
-    @Provides
+object NetworkModule {
     fun providesOkHttpClientBuilder(
     ): OkHttpClient {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder().apply {
@@ -34,8 +29,6 @@ class NetworkModule {
         return builder.build()
     }
 
-    @Reusable
-    @Provides
     fun providesGson(): Gson {
         val builder = GsonBuilder()
         builder.setDateFormat(ISO_DATE_FORMAT)
@@ -43,8 +36,6 @@ class NetworkModule {
         return builder.create()
     }
 
-    @Reusable
-    @Provides
     fun providesRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         val builder = Retrofit.Builder()
         builder.baseUrl(BuildConfig.HOST)
@@ -53,8 +44,6 @@ class NetworkModule {
         return builder.build()
     }
 
-    @Provides
-    @Reusable
     fun provideApi(retrofit: Retrofit): UserAPI {
         return retrofit.create(UserAPI::class.java)
     }
