@@ -6,7 +6,7 @@ import kotlin.reflect.full.createInstance
 class KClassInfo(
     private val id: String,
     private val className: String = id,
-    private val type: Type = Type.Singleton,
+    private val type: Type = Type.Prototype,
 //    val initMethod: Option<String> = none(),
     private var singletonInstance: Optional<Any> = Optional.empty<Any>()
 ) {

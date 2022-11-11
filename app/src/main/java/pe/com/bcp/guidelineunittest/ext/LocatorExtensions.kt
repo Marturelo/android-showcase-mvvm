@@ -7,6 +7,7 @@ import pe.com.bcp.guidelineunittest.data.api.UserAPI
 import pe.com.bcp.guidelineunittest.data.datasource.UserDataSource
 import pe.com.bcp.guidelineunittest.data.datasource.remote.UserDataSourceRemote
 import pe.com.bcp.guidelineunittest.data.repository.UserRepositoryData
+import pe.com.bcp.guidelineunittest.di.KClassInfo
 import pe.com.bcp.guidelineunittest.di.Locator
 import pe.com.bcp.guidelineunittest.di.module.DataModule
 import pe.com.bcp.guidelineunittest.di.module.NetworkModule
@@ -19,7 +20,7 @@ fun Locator.create(app: Application) {
     put(OkHttpClient::class, NetworkModule.providesOkHttpClientBuilder())
     put(Gson::class, NetworkModule.providesGson())
     put(Retrofit::class, NetworkModule.providesRetrofit(get(), get()))
-    put(UserAPI::class, NetworkModule.provideApi(get()))
+    put(UserAPI::class, NetworkModule.provideApi(get()), KClassInfo.Type.Singleton)
 
     //Data
     put(

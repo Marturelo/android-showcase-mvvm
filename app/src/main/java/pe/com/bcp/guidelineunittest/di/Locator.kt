@@ -33,6 +33,9 @@ object Locator {
         type: KClassInfo.Type = KClassInfo.Type.Singleton
     ) = put(idClass.name(), klass, type)
 
-    fun put(idClass: Klass, instance: Any) =
-        map.put(idClass.name(), KClassInfo(idClass.name(), singletonInstance = Optional.of(instance)))
+    fun put(idClass: Klass, instance: Any, type: KClassInfo.Type = KClassInfo.Type.Singleton) =
+        map.put(
+            idClass.name(),
+            KClassInfo(idClass.name(), singletonInstance = Optional.of(instance), type = type)
+        )
 }
