@@ -13,7 +13,10 @@ import pe.com.bcp.guidelineunittest.core.CaptureObservableField
 import pe.com.bcp.guidelineunittest.core.CaptureObserver
 import pe.com.bcp.guidelineunittest.domain.usecase.GetUsersUseCase
 import pe.com.bcp.guidelineunittest.exception.Failure
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.CONTENT
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.EMPTY
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.ERROR
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.LOADING
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 import pe.com.bcp.guidelineunittest.utils.FakeValuesEntity
 import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
@@ -39,8 +42,8 @@ class UsersViewModelTest : BaseViewModelTest() {
     @Test
     fun `given users when populate then verify`() {
         //given
-        val captureObservableField = CaptureObservableField<String>()
-        viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
+        val captureContentState = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureContentState)
         viewModel.setUsers(FakeValuesVO.users())
 
         //when
@@ -48,22 +51,21 @@ class UsersViewModelTest : BaseViewModelTest() {
 
         //then
         verify { getPeoplesUseCase(any(), any(), any()) }
-        Assert.assertEquals(0, captureObservableField.capture.size)
+        Assert.assertEquals(listOf<String>(), captureContentState.capture)
     }
 
     @Test
     fun `given empty users when populate then verify`() {
         //given
-        val captureObservableField = CaptureObservableField<String>()
-        viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
+        val captureContentState = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureContentState)
 
         //when
         viewModel.populate()
 
         //then
         verify { getPeoplesUseCase(any(), any(), any()) }
-        Assert.assertEquals(1, captureObservableField.capture.size)
-        Assert.assertEquals(UsersState.LOADING, captureObservableField.capture[0])
+        Assert.assertEquals(listOf(LOADING), captureContentState.capture)
     }
 
     @Test
@@ -80,10 +82,10 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given get users success result then handleGetProductsUseCaseResult then verify`() {
+    fun `given users success result when handleGetProductsUseCaseResult then verify`() {
         //given
-        val captureObservableField = CaptureObservableField<String>()
-        viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
+        val captureContentState = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureContentState)
         val observerPayload = CaptureObserver<List<UserListItemVO>>()
         val observerIsLoading = CaptureObserver<Boolean>()
         viewModel.users.observeForever(observerPayload)
@@ -95,7 +97,28 @@ class UsersViewModelTest : BaseViewModelTest() {
         )
 
         //then
-        Assert.assertEquals(1, captureObservableField.capture.size)
+        Assert.assertEquals(listOf(CONTENT), captureContentState.capture)
+        Assert.assertEquals(1, observerPayload.capture.size)
+        Assert.assertEquals(false, observerIsLoading.capture.first())
+    }
+
+    @Test
+    fun `given empty success result when handleGetProductsUseCaseResult then verify`() {
+        //given
+        val captureContentState = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureContentState)
+        val observerPayload = CaptureObserver<List<UserListItemVO>>()
+        val observerIsLoading = CaptureObserver<Boolean>()
+        viewModel.users.observeForever(observerPayload)
+        viewModel.isLoading.observeForever(observerIsLoading)
+
+        //when
+        viewModel.handleGetUsersUseCaseResult(
+            Either.Right(listOf())
+        )
+
+        //then
+        Assert.assertEquals(listOf(EMPTY), captureContentState.capture)
         Assert.assertEquals(1, observerPayload.capture.size)
         Assert.assertEquals(false, observerIsLoading.capture.first())
     }

@@ -55,8 +55,14 @@ class UsersViewModel constructor(
                 handleFailure(it)
             }
         } else {
-            contentState.set(UsersState.CONTENT)
             val results = result.getOrElse(listOf())
+
+            if(results.isEmpty()){
+                contentState.set(UsersState.EMPTY)
+            }else{
+                contentState.set(UsersState.CONTENT)
+            }
+
             _users.value = results.map { it.toVO() }
         }
         _isLoading.value = false
@@ -79,6 +85,7 @@ class UsersViewModel constructor(
 
 object UsersState {
     const val CONTENT = StatefulLayout.State.CONTENT
+    const val EMPTY = "STATE_EMPTY"
     const val ERROR = "STATE_ERROR"
     const val LOADING = "STATE_LOADING"
 }

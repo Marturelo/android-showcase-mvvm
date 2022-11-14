@@ -13,6 +13,7 @@ import pe.com.bcp.guidelineunittest.di.Locator
 import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.exception.failure
 import pe.com.bcp.guidelineunittest.exception.observe
+import pe.com.bcp.guidelineunittest.presentation.users.UsersState.EMPTY
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.ERROR
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.LOADING
 import pe.com.bcp.guidelineunittest.presentation.users.adapter.UserController
@@ -77,6 +78,14 @@ class UsersFragment : Fragment() {
             ERROR,
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.layout_users_state_error,
+                null
+            )
+        )
+
+        binding.slUsers.setStateView(
+            EMPTY,
+            LayoutInflater.from(requireContext()).inflate(
+                R.layout.layout_users_state_empty,
                 null
             )
         )
