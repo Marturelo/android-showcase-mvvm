@@ -27,11 +27,6 @@ class UserRepositoryDataTest {
     }
 
     @Test
-    fun notNullViewModel() {
-        Assert.assertNotNull(repository)
-    }
-
-    @Test
     fun `given valid params when run then verify result`() = runTest {
         //given
         val fakeResult = FakeValuesModel.users()

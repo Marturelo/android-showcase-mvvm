@@ -36,11 +36,6 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun notNullViewModel() {
-        Assert.assertNotNull(viewModel)
-    }
-
-    @Test
     fun `given users when populate then verify`() {
         //given
         val captureContentState = CaptureObservableField<String>()

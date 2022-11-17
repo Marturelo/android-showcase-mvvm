@@ -29,11 +29,6 @@ class UserDataSourceRemoteTest {
     }
 
     @Test
-    fun notNullViewModel() {
-        Assert.assertNotNull(dataSource)
-    }
-
-    @Test
     fun `given success Users when run then verify result`() = runTest {
         //given
         val fakeResult = FakeValuesModel.users()

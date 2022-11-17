@@ -23,11 +23,6 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun notNullViewModel() {
-        Assert.assertNotNull(viewModel)
-    }
-
-    @Test
     fun `given userListItem when initWithPeople then verify`() {
         //given
         val observerAvatarUrl = CaptureObserver<String>()
