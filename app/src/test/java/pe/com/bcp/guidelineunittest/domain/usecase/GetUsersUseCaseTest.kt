@@ -28,11 +28,6 @@ class GetUsersUseCaseTest {
     }
 
     @Test
-    fun notNullViewModel() {
-        Assert.assertNotNull(useCase)
-    }
-
-    @Test
     fun `given valid params when run then verify result`() = runTest {
         //given
         val fakeResult = FakeValuesEntity.users()

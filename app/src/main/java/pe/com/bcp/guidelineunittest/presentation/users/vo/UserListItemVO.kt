@@ -7,6 +7,6 @@ import pe.com.bcp.guidelineunittest.domain.entity.UserEntity
 @Parcelize
 data class UserListItemVO(val id: Int, val login: String, val avatarUrl: String) : Parcelable
 
-fun UserEntity.toVO(): UserListItemVO {
+fun UserEntity.toViewObject(): UserListItemVO {
     return UserListItemVO(id, login, avatarUrl)
 }

@@ -7,6 +7,7 @@ plugins {
 }
 apply(from = "buildTypes.gradle")
 apply(from = "jacoco.gradle")
+apply(from = "sonar.gradle")
 
 kapt {
     correctErrorTypes = true

@@ -16,7 +16,7 @@ import pe.com.bcp.guidelineunittest.exception.Failure
 import pe.com.bcp.guidelineunittest.presentation.commons.StatefulLayout
 import pe.com.bcp.guidelineunittest.presentation.core.SingleLiveEvent
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
-import pe.com.bcp.guidelineunittest.presentation.users.vo.toVO
+import pe.com.bcp.guidelineunittest.presentation.users.vo.toViewObject
 
 class UsersViewModel constructor(
     private val getUsersUseCase: GetUsersUseCase,
@@ -63,7 +63,7 @@ class UsersViewModel constructor(
                 contentState.set(UsersState.CONTENT)
             }
 
-            _users.value = results.map { it.toVO() }
+            _users.value = results.map { it.toViewObject() }
         }
         _isLoading.value = false
     }

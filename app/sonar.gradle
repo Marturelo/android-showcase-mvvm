@@ -1,23 +1,6 @@
-apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
 
-jacoco {
-    toolVersion = "0.8.7"
-}
-
-android {
-    buildTypes {
-        debug {
-            testCoverageEnabled false
-        }
-    }
-    testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-                excludes = ['jdk.internal.*']
-            }
-        }
-    }
+sonarqube {
 
     def fileFilter = [
             '**/*$ViewInjector*.*',
@@ -26,7 +9,7 @@ android {
             '**/*$ViewBinder*.*',
             '**/*_ViewBinding*.*',
             '**/R.class',
-            '**/App.class',
+            '**/App.kt',
             '**/R$*.class',
             '**/BuildConfig.*',
             '**/Manifest*.*',
@@ -83,37 +66,16 @@ android {
             '**/di/**/*.*'
     ]
 
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
-    def kotlinTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
-
-    task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest', group: 'jacocoReport') {
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
-        sourceDirectories.from = files([mainSrc, "src/main/kotlin"])
-        classDirectories.from = files([debugTree, kotlinTree])
-        executionData.from = files("${buildDir}/jacoco/testDebugUnitTest.exec")
-    }
-
-    task jacocoTestCoverageVerification(type: JacocoCoverageVerification, dependsOn: 'jacocoTestReport', group: 'jacocoReport') {
-        sourceDirectories.from = files([mainSrc, "src/main/kotlin"])
-        classDirectories.from = files([debugTree, kotlinTree])
-        executionData.from = files("${buildDir}/jacoco/testDebugUnitTest.exec")
-
-        violationRules {
-            setFailOnViolation(true)
-            rule {
-                limit {
-                    minimum = 0.75
-                }
-            }
-        }
-    }
-
-    task jacocoTestCoverageViewResult(type: Exec, dependsOn: 'jacocoTestReport', group: 'jacocoReport') {
-        executable "sh"
-        args "-c", "open '${buildDir}/reports/jacoco/jacocoTestReport/html/index.html'"
+    properties {
+        property "sonar.projectName", "android-showcase-mvvm"
+        property "sonar.projectKey", "android-showcase-mvvm"
+        property "sonar.host.url", "http://localhost:8084"
+        property "sonar.login", "43651b5987eded17339897fe904d6f87a3963abf"
+        property "sonar.language", "kotlin"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.exclusions", fileFilter
+        property "sonar.coverage.jacoco.xmlReportPaths", "$project.rootDir/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
     }
 }
+
+tasks.sonarqube.dependsOn ":app:jacocoTestReport"

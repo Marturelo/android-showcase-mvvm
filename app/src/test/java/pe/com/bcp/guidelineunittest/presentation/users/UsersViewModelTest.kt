@@ -18,7 +18,7 @@ import pe.com.bcp.guidelineunittest.presentation.users.UsersState.EMPTY
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.ERROR
 import pe.com.bcp.guidelineunittest.presentation.users.UsersState.LOADING
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
-import pe.com.bcp.guidelineunittest.presentation.users.vo.toVO
+import pe.com.bcp.guidelineunittest.presentation.users.vo.toViewObject
 import pe.com.bcp.guidelineunittest.utils.FakeValuesEntity
 import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
 
@@ -100,7 +100,7 @@ class UsersViewModelTest : BaseViewModelTest() {
 
         //then
         Assert.assertEquals(listOf(CONTENT), captureContentState.capture)
-        Assert.assertEquals(listOf(usersEntity.map { it.toVO() }), observerUsers.capture)
+        Assert.assertEquals(listOf(usersEntity.map { it.toViewObject() }), observerUsers.capture)
         Assert.assertEquals(listOf(false), observerIsLoading.capture)
     }
 
