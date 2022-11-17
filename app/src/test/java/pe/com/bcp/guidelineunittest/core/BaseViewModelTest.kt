@@ -14,6 +14,4 @@ abstract class BaseViewModelTest {
 
     @get:Rule
     val executeLiveDataInstantly = InstantTaskExecutorRule()
-
-    val lifecycle = LifecycleRegistry(mockk())
 }
