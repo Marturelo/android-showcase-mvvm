@@ -36,6 +36,20 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
+    fun `given init viewModel when populate then verify`() {
+        //given
+        val captureContentState = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureContentState)
+
+        //when
+        viewModel.populate()
+
+        //then
+        verify { getPeoplesUseCase(any(), any(), any()) }
+        Assert.assertEquals(listOf(LOADING), captureContentState.capture)
+    }
+
+    @Test
     fun `given users when populate then verify`() {
         //given
         val captureContentState = CaptureObservableField<String>()

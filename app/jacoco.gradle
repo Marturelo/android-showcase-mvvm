@@ -37,7 +37,6 @@ android {
             '**/adapter/*',
             '**/observer/*',
             '**/commons/**/*.*',
-            '**/ingresarclave/*',
             '**/view/*',
             '**/extension/*',
             '**/ext/*',
