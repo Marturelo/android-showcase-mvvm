@@ -13,6 +13,5 @@ class UserDataSourceRemote (private val api: UserAPI) : UserDataSource {
             true -> Either.Right(response.body() ?: listOf())
             false -> Either.Left(Failure.UnknownError)
         }
-
     }
 }

@@ -23,7 +23,7 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given userListItem when initWithPeople then verify`() {
+    fun `given userListItem when initWithUser then verify`() {
         //given
         val observerAvatarUrl = CaptureObserver<String>()
         viewModel.avatarUrl.observeForever(observerAvatarUrl)
