@@ -6,6 +6,7 @@ import io.mockk.spyk
 import io.mockk.verify
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import pe.com.bcp.guidelineunittest.commons.utils.Either
 import pe.com.bcp.guidelineunittest.core.BaseViewModelTest
@@ -171,7 +172,6 @@ class UsersViewModelTest : BaseViewModelTest() {
 
         //then
         Assert.assertEquals(listOf(user), observerGoToDetails.capture)
-
     }
 
 }

@@ -4,12 +4,12 @@ import io.mockk.MockKAnnotations
 import io.mockk.spyk
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import pe.com.bcp.guidelineunittest.core.BaseViewModelTest
 import pe.com.bcp.guidelineunittest.core.CaptureObservableField
 import pe.com.bcp.guidelineunittest.core.CaptureObserver
 import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
-
 
 class UserDetailsViewModelTest : BaseViewModelTest() {
 

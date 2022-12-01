@@ -1,6 +1,5 @@
 package pe.com.bcp.guidelineunittest.data.datasource.remote
 
-import com.nhaarman.mockitokotlin2.mock
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.InjectMockKs
@@ -10,6 +9,7 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import pe.com.bcp.guidelineunittest.commons.utils.Either
 import pe.com.bcp.guidelineunittest.data.api.UserAPI
@@ -30,7 +30,7 @@ class UserDataSourceRemoteTest {
     }
 
     @Test
-    fun `given success Users when run then verify result`() = runTest {
+    fun `given success Users when users then verify result`() = runTest {
         //given
         val fakeResult = mockk<List<UserModel>>()
         coEvery { api.users() } returns Response.success(fakeResult)
@@ -43,7 +43,7 @@ class UserDataSourceRemoteTest {
     }
 
     @Test
-    fun `given null Response when run then verify result`() = runTest {
+    fun `given null Response when users then verify result`() = runTest {
         //given
         coEvery { api.users() } returns Response.success(null)
 
@@ -55,7 +55,7 @@ class UserDataSourceRemoteTest {
     }
 
     @Test
-    fun `given fail result when run then verify result`() = runTest {
+    fun `given fail result when users then verify result`() = runTest {
         //given
         coEvery { api.users() } returns Response.error(500, byteArrayOf().toResponseBody())
 
@@ -63,7 +63,6 @@ class UserDataSourceRemoteTest {
         val result = dataSource.users()
 
         //then
-        Assert.assertTrue(result.isLeft)
         Assert.assertEquals(result, Either.Left(Failure.UnknownError))
     }
 }
