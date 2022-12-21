@@ -1,6 +1,7 @@
 package pe.com.bcp.guidelineunittest.domain.usecase
 
 import io.mockk.*
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -18,13 +19,13 @@ class GetUsersUseCaseTest {
     @MockK(relaxed = true)
     lateinit var userRepository: UserRepository
 
+    @InjectMockKs
     lateinit var useCase: GetUsersUseCase
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockKAnnotations.init(this)
-        useCase = spyk(GetUsersUseCase(userRepository))
     }
 
     @Test
