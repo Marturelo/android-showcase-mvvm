@@ -1,3 +1,7 @@
+package plugins
+
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     id("io.gitlab.arturbosch.detekt")
 }
@@ -10,7 +14,11 @@ tasks.register<Detekt>("detektAll") {
     description = "Runs Detekt on the whole project at once."
     parallel = true
     setSource(projectDir)
-    include("**/*.kt", "**/*.kts")
-    exclude("**/resources/**", "**/build/**")
-    config.setFrom(project.file("detekt/config.yml"))
+    include("**/*.kt")
+    include("**/*.kts")
+    exclude("**/resources/**")
+    exclude("**/build/**")
+    exclude("**/buildSrc/**")
+    exclude("**/build.gradle.kts")
+    config.setFrom(files("$rootDir/tools/detekt/detekt.yml"))
 }

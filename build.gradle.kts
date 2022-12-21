@@ -1,8 +1,6 @@
-
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    id("plugins.detekt")
 }
-
 buildscript {
 
     val kotlinVersion by extra { "1.5.31" }
@@ -26,22 +24,6 @@ buildscript {
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion")
     }
 }
-
-//apply(from = "io.gitlab.arturbosch.detekt")
-
-tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt::class.java) {
-    parallel = true
-    setSource(files(projectDir))
-    include("**/*.kt")
-    include("**/*.kts")
-    exclude("**/resources/**")
-    exclude("**/build/**")
-    exclude("**/buildSrc/**")
-    exclude("**/build.gradle.kts")
-    config.setFrom(files("$rootDir/tools/detekt/detekt.yml"))
-    buildUponDefaultConfig = false
-}
-
 allprojects {
     repositories {
         google()
@@ -53,8 +35,9 @@ tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
 
+/*
 copy {
     from("$rootDir/tools/git_scripts/pre-commit")
     into("$rootDir/.git/hooks")
     fileMode = 0b000_111_111_111
-}
+}*/
