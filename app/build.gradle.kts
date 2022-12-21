@@ -1,9 +1,10 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
+    id ("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("io.gitlab.arturbosch.detekt")
 }
 apply(from = "buildTypes.gradle")
 apply(from = "jacoco.gradle")
@@ -110,4 +111,6 @@ dependencies {
             freeCompilerArgs.plus("-Xjvm-default=all-compatibility")
         }
     }
+
+    detekt ("io.gitlab.arturbosch.detekt:detekt-cli:1.18.1")
 }
