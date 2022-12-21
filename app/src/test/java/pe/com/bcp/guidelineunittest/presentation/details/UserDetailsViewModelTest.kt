@@ -45,7 +45,7 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given viewModel when initWithPeople then verify`() {
+    fun `given viewModel when handleBackNavigatorPressed then verify`() {
         //given
         val observerGoToBack = CaptureObserver<Any>()
         viewModel.goToBack.observeForever(observerGoToBack)

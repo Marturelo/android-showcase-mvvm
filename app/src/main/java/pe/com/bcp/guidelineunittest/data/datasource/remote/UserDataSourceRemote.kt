@@ -14,6 +14,5 @@ class UserDataSourceRemote @Inject constructor(private val api: UserAPI) : UserD
             true -> Either.Right(response.body() ?: listOf())
             false -> Either.Left(Failure.UnknownError)
         }
-
     }
 }

@@ -67,7 +67,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given viewModel when refresh then verify`() {
+    fun `given viewModel when refresh when verify`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
@@ -80,7 +80,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given get users success result then handleGetProductsUseCaseResult then verify`() {
+    fun `given get users success result when handleGetProductsUseCaseResult then verify`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
@@ -101,7 +101,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given get users failed result then handleGetProductsUseCaseResult then verify`() {
+    fun `given get users failed result when handleGetProductsUseCaseResult then verify`() {
         //given
         val captureContentStateObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureContentStateObservableField)
@@ -127,7 +127,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given loaded users then handleItemPressed then verify`() {
+    fun `given loaded users when handleItemPressed then verify`() {
         //given
         val observerGoToDetails = CaptureObserver<UserListItemVO>()
         viewModel.goToDetails.observeForever(observerGoToDetails)
@@ -138,7 +138,6 @@ class UsersViewModelTest : BaseViewModelTest() {
 
         //then
         Assert.assertEquals(listOf(user), observerGoToDetails.capture)
-
     }
 
 }

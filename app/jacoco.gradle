@@ -103,7 +103,7 @@ android {
             setFailOnViolation(true)
             rule {
                 limit {
-                    minimum = 0.85
+                    minimum = 0.99
                 }
             }
         }

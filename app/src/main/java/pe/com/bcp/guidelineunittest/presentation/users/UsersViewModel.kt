@@ -29,7 +29,7 @@ class UsersViewModel @Inject constructor(
     private val _users: MutableLiveData<List<UserListItemVO>> = MutableLiveData()
     val users: LiveData<List<UserListItemVO>> = _users
 
-    private val _failure: MutableLiveData<Failure> = MutableLiveData()
+    private val _failure: MutableLiveData<Failure> = SingleLiveEvent()
     val failure: LiveData<Failure> = _failure
 
     private var _isLoading = MutableLiveData<Boolean>()
