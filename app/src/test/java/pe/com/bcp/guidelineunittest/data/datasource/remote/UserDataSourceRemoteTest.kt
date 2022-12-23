@@ -1,68 +1,98 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package pe.com.bcp.guidelineunittest.data.datasource.remote
 
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
+import com.google.gson.Gson
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import okhttp3.ResponseBody.Companion.toResponseBody
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import pe.com.bcp.guidelineunittest.commons.utils.Either
 import pe.com.bcp.guidelineunittest.data.api.UserAPI
+import pe.com.bcp.guidelineunittest.data.datasource.UserDataSource
 import pe.com.bcp.guidelineunittest.data.model.UserModel
+import pe.com.bcp.guidelineunittest.di.module.NetworkModule
 import pe.com.bcp.guidelineunittest.exception.Failure
-import retrofit2.Response
+import pe.com.bcp.guidelineunittest.utils.FakeValuesModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class UserDataSourceRemoteTest {
-    @MockK(relaxed = true)
     private lateinit var api: UserAPI
+    lateinit var gson: Gson
 
-    @InjectMockKs
-    private lateinit var dataSource: UserDataSourceRemote
+    @get:Rule
+    val mockWebServer = MockWebServer()
+
+    private lateinit var dataSource: UserDataSource
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this)
+        gson = NetworkModule.providesGson()
+
+        api = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(NetworkModule.providesOkHttpClientBuilder())
+            .build()
+            .create(UserAPI::class.java)
+
+        dataSource = UserDataSourceRemote(api)
     }
 
     @Test
     fun `given success Users when users then verify result`() = runTest {
         //given
-        val fakeResult = mockk<List<UserModel>>()
-        coEvery { api.users() } returns Response.success(fakeResult)
+        val fakeResult = FakeValuesModel.users()
+        mockWebServer.enqueue(MockResponse().apply {
+            setBody(gson.toJson(fakeResult))
+            setResponseCode(200)
+        })
 
         //when
         val result = dataSource.users()
 
         //then
         Assert.assertEquals(Either.Right(fakeResult), result)
+        Assert.assertFalse(result.isLeft)
+        Assert.assertTrue(result.isRight)
     }
 
     @Test
-    fun `given null Response when users then verify result`() = runTest {
+    fun `given empty Response when users then verify result`() = runTest {
         //given
-        coEvery { api.users() } returns Response.success(null)
+        mockWebServer.enqueue(MockResponse().apply {
+            setBody("[]")
+            setResponseCode(200)
+        })
 
         //when
         val result = dataSource.users()
 
         //then
         Assert.assertEquals(Either.Right<List<UserModel>>(listOf()), result)
+        Assert.assertFalse(result.isLeft)
+        Assert.assertTrue(result.isRight)
     }
 
     @Test
     fun `given fail result when users then verify result`() = runTest {
         //given
-        coEvery { api.users() } returns Response.error(500, byteArrayOf().toResponseBody())
+        mockWebServer.enqueue(MockResponse().apply {
+            setBody("")
+            setResponseCode(500)
+        })
 
         //when
         val result = dataSource.users()
 
         //then
         Assert.assertEquals(result, Either.Left(Failure.UnknownError))
+        Assert.assertTrue(result.isLeft)
+        Assert.assertFalse(result.isRight)
     }
 }

@@ -88,8 +88,8 @@ android {
 
     task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest', group: 'jacocoReport') {
         reports {
-            xml.enabled = true
-            html.enabled = true
+            xml.required = true
+            html.required = true
         }
         sourceDirectories.from = files([mainSrc, "src/main/kotlin"])
         classDirectories.from = files([debugTree, kotlinTree])
