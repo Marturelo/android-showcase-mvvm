@@ -1,2 +1,3 @@
 rootProject.name = "GuidelineUnitTest-MVVM"
 include ':app'
+include ':linterrules'

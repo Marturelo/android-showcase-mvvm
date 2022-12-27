@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
+    id ("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
 }
 apply(from = "buildTypes.gradle")
@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId = "com.marturelo.productlistmvvm"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 33
         versionCode = 1
         versionName = "1.1"
@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+
 
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.5.0")
@@ -104,6 +105,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    lintChecks(project(":linterrules"))
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {
