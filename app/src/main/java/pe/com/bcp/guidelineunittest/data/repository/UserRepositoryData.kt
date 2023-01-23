@@ -9,7 +9,7 @@ import pe.com.bcp.guidelineunittest.domain.repository.UserRepository
 import pe.com.bcp.guidelineunittest.exception.Failure
 import javax.inject.Inject
 
-class UserRepositoryData @Inject constructor(private val remoteDataSource: UserDataSource) :
+open class UserRepositoryData @Inject constructor(private val remoteDataSource: UserDataSource) :
     UserRepository {
     override suspend fun users(): Either<Failure, List<UserEntity>> {
         return remoteDataSource.users().map { result ->
