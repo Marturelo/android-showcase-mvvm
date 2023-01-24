@@ -1,30 +1,29 @@
 package pe.com.bcp.guidelineunittest.presentation.users
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.MockK
+import io.mockk.spyk
+import io.mockk.verify
+import org.junit.Assert
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import pe.com.bcp.guidelineunittest.core.BaseViewModelTest
 import pe.com.bcp.guidelineunittest.core.CaptureObservableField
-import pe.com.bcp.guidelineunittest.core.MainCoroutineRule
-import pe.com.bcp.guidelineunittest.domain.usecase.MockGetUsersUseCase
+import pe.com.bcp.guidelineunittest.domain.usecase.GetUsersUseCase
 import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class UsersViewModelTest : BaseViewModelTest() {
 
-    @get:Rule
-    val coroutineRule = MainCoroutineRule()
+    @MockK(relaxUnitFun = true)
+    lateinit var getPeoplesUseCase: GetUsersUseCase
 
-    lateinit var getPeoplesUseCase: MockGetUsersUseCase
-
-    private lateinit var viewModel: SpyUsersViewModel
+    private lateinit var viewModel: UsersViewModel
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        getPeoplesUseCase = MockGetUsersUseCase()
-        viewModel = SpyUsersViewModel(getPeoplesUseCase)
+        MockKAnnotations.init(this)
+        viewModel = spyk(UsersViewModel(getPeoplesUseCase))
     }
 
     @Test
@@ -38,12 +37,8 @@ class UsersViewModelTest : BaseViewModelTest() {
         viewModel.populate()
 
         //then
-        if (getPeoplesUseCase.runExactly == 0) {
-            throw Exception("No se visito getPeoplesUseCase")
-        }
-        if (0 == captureObservableField.capture.size) {
-            throw Exception("No se son iguales")
-        }
+        verify { getPeoplesUseCase(any(), any(), any()) }
+        Assert.assertEquals(captureObservableField.capture.size, 0)
     }
 
     @Test
@@ -56,15 +51,8 @@ class UsersViewModelTest : BaseViewModelTest() {
         viewModel.populate()
 
         //then
-        if (getPeoplesUseCase.runExactly == 0) {
-            throw Exception("No se visito getPeoplesUseCase")
-        }
-        if (0 == captureObservableField.capture.size) {
-            throw Exception("El content state no es igual")
-        }
-        if (UsersState.LOADING != captureObservableField.capture[0]) {
-            throw Exception("El primer estado no es LOADING")
-        }
+        verify { getPeoplesUseCase(any(), any(), any()) }
+        Assert.assertEquals(captureObservableField.capture, listOf(UsersState.LOADING))
     }
 
     @Test
@@ -77,9 +65,7 @@ class UsersViewModelTest : BaseViewModelTest() {
         viewModel.refresh()
 
         //then
-        if (viewModel.populateExactly == 0) {
-            throw Exception("No se visito getPeoplesUseCase")
-        }
+        verify { viewModel.populate() }
     }
 
 }

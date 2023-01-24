@@ -19,7 +19,7 @@ import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 import pe.com.bcp.guidelineunittest.presentation.users.vo.toVO
 import javax.inject.Inject
 
-open class UsersViewModel @Inject constructor(
+class UsersViewModel @Inject constructor(
         private val getUsersUseCase: GetUsersUseCase,
 ) : ViewModel() {
 
@@ -37,14 +37,14 @@ open class UsersViewModel @Inject constructor(
 
     val contentState = ObservableField<String>()
 
-    open fun populate() {
+    fun populate() {
         if (users.value.isNullOrEmpty()) {
             contentState.set(UsersState.LOADING)
         }
         getUsersUseCase(UseCase.None, viewModelScope, ::handleGetUsersUseCaseResult)
     }
 
-    open fun refresh() {
+    fun refresh() {
         this.populate()
     }
 
