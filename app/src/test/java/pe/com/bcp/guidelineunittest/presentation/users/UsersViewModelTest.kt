@@ -18,17 +18,17 @@ class UsersViewModelTest : BaseViewModelTest() {
 
     lateinit var getPeoplesUseCase: MockGetUsersUseCase
 
-    private lateinit var viewModel: UsersViewModel
+    private lateinit var viewModel: SpyUsersViewModel
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
         getPeoplesUseCase = MockGetUsersUseCase()
-        viewModel = UsersViewModel(getPeoplesUseCase)
+        viewModel = SpyUsersViewModel(getPeoplesUseCase)
     }
 
     @Test
-    fun `given users when populate then verify`() {
+    fun `given users when populate then verify interactions`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
@@ -47,7 +47,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given empty users when populate then verify`() {
+    fun `given empty users when populate then verify interactions`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
@@ -64,6 +64,21 @@ class UsersViewModelTest : BaseViewModelTest() {
         }
         if (UsersState.LOADING != captureObservableField.capture[0]) {
             throw Exception("El primer estado no es LOADING")
+        }
+    }
+
+    @Test
+    fun `given users when refresh then verify interactions`() {
+        //given
+        val captureObservableField = CaptureObservableField<String>()
+        viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
+
+        //when
+        viewModel.refresh()
+
+        //then
+        if (viewModel.populateExactly == 0) {
+            throw Exception("No se visito getPeoplesUseCase")
         }
     }
 
