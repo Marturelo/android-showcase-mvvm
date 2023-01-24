@@ -23,7 +23,7 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given userListItem when initWithPeople then verify`() {
+    fun `given userListItem when initWithPeople then verify interactions`() {
         //given
         val observerAvatarUrl = CaptureObserver<String>()
         viewModel.avatarUrl.observeForever(observerAvatarUrl)
@@ -40,7 +40,7 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given viewModel when handleBackNavigatorPressed then verify`() {
+    fun `given viewModel when handleBackNavigatorPressed then verify interactions`() {
         //given
         val observerGoToBack = CaptureObserver<Any>()
         viewModel.goToBack.observeForever(observerGoToBack)
