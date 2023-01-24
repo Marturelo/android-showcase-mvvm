@@ -28,7 +28,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given users when populate then verify`() {
+    fun `given users when populate then verify interactions`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
@@ -47,7 +47,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `given empty users when populate then verify`() {
+    fun `given empty users when populate then verify interactions`() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
