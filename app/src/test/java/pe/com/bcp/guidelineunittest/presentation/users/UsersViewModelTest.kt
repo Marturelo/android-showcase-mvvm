@@ -1,6 +1,5 @@
 package pe.com.bcp.guidelineunittest.presentation.users
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -10,7 +9,6 @@ import pe.com.bcp.guidelineunittest.core.MainCoroutineRule
 import pe.com.bcp.guidelineunittest.domain.usecase.MockGetUsersUseCase
 import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class UsersViewModelTest : BaseViewModelTest() {
 
     @get:Rule
