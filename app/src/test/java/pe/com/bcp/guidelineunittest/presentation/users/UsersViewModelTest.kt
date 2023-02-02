@@ -10,7 +10,7 @@ import org.junit.Test
 import pe.com.bcp.guidelineunittest.core.BaseViewModelTest
 import pe.com.bcp.guidelineunittest.core.CaptureObservableField
 import pe.com.bcp.guidelineunittest.domain.usecase.GetUsersUseCase
-import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
+import pe.com.bcp.guidelineunittest.utils.DummyValuesVO
 
 class UsersViewModelTest : BaseViewModelTest() {
 
@@ -31,7 +31,7 @@ class UsersViewModelTest : BaseViewModelTest() {
         //given
         val captureObservableField = CaptureObservableField<String>()
         viewModel.contentState.addOnPropertyChangedCallback(captureObservableField)
-        viewModel.setUsers(FakeValuesVO.users())
+        viewModel.setUsers(DummyValuesVO.users())
 
         //when
         viewModel.populate()

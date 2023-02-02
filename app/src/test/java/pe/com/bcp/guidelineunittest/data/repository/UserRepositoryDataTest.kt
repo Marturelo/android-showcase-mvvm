@@ -12,7 +12,7 @@ import pe.com.bcp.guidelineunittest.commons.utils.Either
 import pe.com.bcp.guidelineunittest.commons.utils.getOrElse
 import pe.com.bcp.guidelineunittest.data.datasource.UserDataSource
 import pe.com.bcp.guidelineunittest.exception.Failure
-import pe.com.bcp.guidelineunittest.utils.FakeValuesModel
+import pe.com.bcp.guidelineunittest.utils.DummyValuesModel
 
 class UserRepositoryDataTest {
     @MockK(relaxed = true)
@@ -34,7 +34,7 @@ class UserRepositoryDataTest {
     @Test
     fun `given valid params when run then verify result`() = runTest {
         //given
-        val fakeResult = FakeValuesModel.users()
+        val fakeResult = DummyValuesModel.users()
         coEvery { dataSource.users() } returns Either.Right(fakeResult)
 
         //when

@@ -2,7 +2,7 @@ package pe.com.bcp.guidelineunittest.utils
 
 import pe.com.bcp.guidelineunittest.domain.entity.UserEntity
 
-object FakeValuesEntity {
+object DummyValuesEntity {
     fun user(): UserEntity {
         return UserEntity(
             "Fake",
