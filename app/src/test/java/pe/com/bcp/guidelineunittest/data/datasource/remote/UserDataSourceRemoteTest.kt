@@ -13,7 +13,7 @@ import pe.com.bcp.guidelineunittest.commons.utils.Either
 import pe.com.bcp.guidelineunittest.data.api.UserAPI
 import pe.com.bcp.guidelineunittest.data.model.UserModel
 import pe.com.bcp.guidelineunittest.exception.Failure
-import pe.com.bcp.guidelineunittest.utils.FakeValuesModel
+import pe.com.bcp.guidelineunittest.utils.DummyValuesModel
 import retrofit2.Response
 
 class UserDataSourceRemoteTest {
@@ -36,8 +36,8 @@ class UserDataSourceRemoteTest {
     @Test
     fun `given success Users when run then verify result`() = runTest {
         //given
-        val fakeResult = FakeValuesModel.users()
-        coEvery { api.users() } returns Response.success(FakeValuesModel.users())
+        val fakeResult = DummyValuesModel.users()
+        coEvery { api.users() } returns Response.success(DummyValuesModel.users())
 
         //when
         val result = dataSource.users()

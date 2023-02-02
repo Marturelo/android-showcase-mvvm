@@ -8,7 +8,7 @@ import org.junit.Test
 import pe.com.bcp.guidelineunittest.core.BaseViewModelTest
 import pe.com.bcp.guidelineunittest.core.CaptureObservableField
 import pe.com.bcp.guidelineunittest.core.CaptureObserver
-import pe.com.bcp.guidelineunittest.utils.FakeValuesVO
+import pe.com.bcp.guidelineunittest.utils.DummyValuesVO
 
 
 class UserDetailsViewModelTest : BaseViewModelTest() {
@@ -29,7 +29,7 @@ class UserDetailsViewModelTest : BaseViewModelTest() {
         viewModel.avatarUrl.observeForever(observerAvatarUrl)
         val observerLogin = CaptureObservableField<String>()
         viewModel.login.addOnPropertyChangedCallback(observerLogin)
-        val userListItemVO = FakeValuesVO.user()
+        val userListItemVO = DummyValuesVO.user()
 
         //when
         viewModel.initWithPeople(userListItemVO)

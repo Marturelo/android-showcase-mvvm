@@ -12,7 +12,7 @@ import pe.com.bcp.guidelineunittest.commons.utils.getOrElse
 import pe.com.bcp.guidelineunittest.domain.core.UseCase
 import pe.com.bcp.guidelineunittest.domain.repository.UserRepository
 import pe.com.bcp.guidelineunittest.exception.Failure
-import pe.com.bcp.guidelineunittest.utils.FakeValuesEntity
+import pe.com.bcp.guidelineunittest.utils.DummyValuesEntity
 
 class GetUsersUseCaseTest {
 
@@ -36,7 +36,7 @@ class GetUsersUseCaseTest {
     @Test
     fun `given valid params when run then verify result`() = runTest {
         //given
-        val fakeResult = FakeValuesEntity.users()
+        val fakeResult = DummyValuesEntity.users()
         coEvery { userRepository.users() } returns Either.Right(fakeResult)
 
         //when

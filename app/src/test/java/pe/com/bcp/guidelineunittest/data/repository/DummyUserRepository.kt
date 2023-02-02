@@ -5,7 +5,7 @@ import pe.com.bcp.guidelineunittest.domain.entity.UserEntity
 import pe.com.bcp.guidelineunittest.domain.repository.UserRepository
 import pe.com.bcp.guidelineunittest.exception.Failure
 
-class FakeUserRepository : UserRepository {
+class DummyUserRepository : UserRepository {
     override suspend fun users(): Either<Failure, List<UserEntity>> {
         return Either.Right(emptyList())
     }

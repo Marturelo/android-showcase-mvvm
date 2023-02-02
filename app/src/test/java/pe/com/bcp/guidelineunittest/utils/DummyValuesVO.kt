@@ -2,7 +2,7 @@ package pe.com.bcp.guidelineunittest.utils
 
 import pe.com.bcp.guidelineunittest.presentation.users.vo.UserListItemVO
 
-object FakeValuesVO {
+object DummyValuesVO {
     fun user(): UserListItemVO {
         return UserListItemVO(
             -1,

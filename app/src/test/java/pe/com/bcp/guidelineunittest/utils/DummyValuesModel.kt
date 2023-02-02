@@ -2,7 +2,7 @@ package pe.com.bcp.guidelineunittest.utils
 
 import pe.com.bcp.guidelineunittest.data.model.UserModel
 
-object FakeValuesModel {
+object DummyValuesModel {
     fun user(): UserModel {
         return UserModel(
             avatarUrl = "Fake",
