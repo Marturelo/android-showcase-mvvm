@@ -1,9 +1,14 @@
+plugins {
+    id("plugins.detekt")
+}
 buildscript {
 
     val kotlinVersion by extra { "1.5.31" }
     val navVersion by extra { "2.4.1" }
-    val androidGradlePluginVersion by extra { "7.0.3" }
+    val androidGradlePluginVersion by extra { "7.3.0" }
     val jacocoVersion by extra { "0.8.7" }
+    val sonarqubeVersion by extra { "2.8" }
+    val detektVersion by extra { "1.20.0" }
 
     repositories {
         google()
@@ -15,6 +20,8 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
         classpath("org.jacoco:org.jacoco.core:$jacocoVersion")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$sonarqubeVersion")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion")
     }
 }
 
@@ -28,3 +35,10 @@ allprojects {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+/*
+copy {
+    from("$rootDir/tools/git_scripts/pre-commit")
+    into("$rootDir/.git/hooks")
+    fileMode = 0b000_111_111_111
+}*/
